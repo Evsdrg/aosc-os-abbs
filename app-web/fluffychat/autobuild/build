@@ -1,0 +1,15 @@
+abinfo "Building FluffyChat ..."
+fvm flutter build linux --release -v
+
+abinfo "Installing FluffyChat ..."
+install -dvm755 "$PKGDIR"/usr/lib/fluffychat
+cp -av "$FLUTTER_OUT"/. "$PKGDIR"/usr/lib/fluffychat/
+
+install -dvm755 "$PKGDIR"/usr/bin
+ln -sv ../lib/fluffychat/fluffychat "$PKGDIR"/usr/bin/fluffychat
+
+install -Dvm644 "$SRCDIR"/snap/gui/fluffychat.png \
+    "$PKGDIR"/usr/share/pixmaps/fluffychat.png
+
+install -Dvm644 "$SRCDIR"/LICENSE \
+    "$PKGDIR"/usr/share/doc/fluffychat/LICENSE
